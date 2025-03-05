@@ -8,8 +8,9 @@ namespace Repetisjon.BilEksempel
 {
     class BilProgram
     {
-        public void KjørProgram() {
-           
+        public void KjørProgram()
+        {
+
             /*
              Forslag til repetisjon
             - Lage egne klasser og objekter (f.eks. en klasse for en bil, med constructor)
@@ -114,6 +115,26 @@ namespace Repetisjon.BilEksempel
                     bil.FyllDrivstoff(10);
                 }
             }
+
+            var sorterteBiler =
+                from bil in bilListe
+                orderby bil
+                select new {BilVerdi = bil.Merke+bil.AntallLitereDrivstoff };
+
+            foreach (var bil in sorterteBiler)
+            {
+                Console.WriteLine(bil);
+            }
+
+           // Bil[] bilerArray = LagBilSamling();
+
+            var bilerArrayMedVar = LagBilSamling();
+        }
+
+        private List<Bil> LagBilSamling()
+        {
+
+            return new List<Bil>();
         }
     }
 }

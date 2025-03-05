@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Repetisjon.BilEksempel
 {
-    class Bil
+    class Bil : IComparable<Bil>
     {
         //Denne lages automatisk dersom ingen constructor er definert
         public Bil()
         {
-            
+
         }
         public Bil(string Merke, string modell, int registreringsår, string registreringsnummer)
         {
@@ -20,8 +20,8 @@ namespace Repetisjon.BilEksempel
             Registreringsår = registreringsår;
             Registreringsnummer = registreringsnummer;
         }
-    
-        public string Merke { get;  set; }
+
+        public string Merke { get; set; }
         public string Modell { get; set; }
         public int Registreringsår { get; set; }
         public string Registreringsnummer { get; set; }
@@ -30,7 +30,7 @@ namespace Repetisjon.BilEksempel
         public bool Kjører()
         {
             AntallLitereDrivstoff--;
-            if(AntallLitereDrivstoff <= 0)
+            if (AntallLitereDrivstoff <= 0)
             {
                 Console.WriteLine("Bilen er tom for drivstoff");
                 return false;
@@ -55,8 +55,8 @@ namespace Repetisjon.BilEksempel
                 Console.WriteLine("Du kan ikke fylle negativt antall liter");
                 return false;
             }
-     
-            if(antallLitere + AntallLitereDrivstoff > 60)
+
+            if (antallLitere + AntallLitereDrivstoff > 60)
             {
                 Console.WriteLine("Du kan ikke fylle mer enn 60 liter");
                 return false;
@@ -64,8 +64,27 @@ namespace Repetisjon.BilEksempel
             return true;
         }
 
+        public int CompareTo(Bil? other)
+        {
+            if(other == null)
+            {
+                return -1;
+            }
+            if(Registreringsår < other.Registreringsår)
+            {
+                return -1;
+            }
+            if (Registreringsår > other.Registreringsår)
+            {
+                return 1;
+            }
+            return 0;
+        }
 
-
-
+        public override string ToString()
+        {
+            return $"{Merke} {Modell} {Registreringsår} {Registreringsnummer}";
+        }
     }
+
 }
