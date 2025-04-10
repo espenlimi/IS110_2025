@@ -2,6 +2,16 @@
 {
     public class TestableCode
     {
+        private readonly IExternalClass externalClass;
+
+        public TestableCode(IExternalClass externalClass)
+        {
+            this.externalClass = externalClass;
+        }
+        public TestableCode()
+        {
+            externalClass = new ExternalClass();
+        }
         public string State { get; private set; } = "Initial State";
         
         public int Add(int a, int b)
@@ -16,11 +26,16 @@
 
         public void External(int value)
         { 
-            new ExternalClass().ExternalMethod(value);
+            externalClass.ExternalMethod(value);
+        }
+
+        public int Multiply(int a, int b)
+        {
+            return 50;
         }
     }
 
-    public class ExternalClass
+    public class ExternalClass : IExternalClass
     {
         public void ExternalMethod(int value)
         {
